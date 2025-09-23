@@ -382,7 +382,7 @@ This work demonstrates a foundational step toward **hardware acceleration of QKD
 - Provides **real-time hardware acceleration** for QKD post-processing  
 
 👉 **Full Verilog source code is available here:**  
-[🔗 Verilog HDL for QKD Privacy Amplification](https://github.com/SRB-TYAGI/QKD-project/tree/main/Verilog_PrivacyAmplification)
+[🔗 Verilog HDL for QKD Privacy Amplification](https://github.com/SRB-TYAGI/QKD-project/tree/main/3.Privacy%20Amplification%20Block)
 
 ---
 
