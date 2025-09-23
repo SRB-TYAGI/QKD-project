@@ -388,6 +388,3 @@ This work demonstrates a foundational step toward **hardware acceleration of QKD
 ---
 
 
-
-## 📂 Project Structure
-
