@@ -50,7 +50,64 @@ The following figure illustrates the post-processing steps in a typical QKD prot
   <img src="https://raw.githubusercontent.com/SRB-TYAGI/QKD-project/main/Images/QKD%20Post-Processing%20Workflow.png" alt="QKD Post-Processing Workflow" width="600"/>
 </p>
 
+## III. C/C++ Implementation
 
+### 🔷 Objective
+This project simulates the **post-processing steps** of Quantum Key Distribution (QKD) — focusing on **error detection, correction, and privacy amplification** — using the **BB84 protocol** principles.  
+The goal is to demonstrate how **Alice** and **Bob** can generate a shared secret key while ensuring it is free from errors and secure against eavesdropping.
+
+---
+
+### 🔷 Tools & Technologies
+- **Programming Language:** C++  
+- **Platform:** VS Code on Windows  
+- **Compiler:** g++  
+- **Libraries:** Standard C++ Libraries, Custom `qkdtools::PrivAmp` class  
+
+---
+
+### 🔷 QKD Post-Processing Phases
+The simulation covers four main phases:
+
+1. **Parameter Estimation**  
+2. **Sifting**  
+3. **Information Reconciliation (Error Detection)**  
+4. **Privacy Amplification**  
+
+Each phase ensures the **security, integrity, and synchronization** of the final shared key.
+
+---
+
+### 🔷 Execution Flow & Output Analysis
+
+<p align="center">
+  <img src="https://github.com/SRB-TYAGI/QKD-project/blob/main/Images/Picture1.png" alt="" width="600"/>
+   <img src="https://github.com/SRB-TYAGI/QKD-project/blob/main/Images/Picture2.png" alt="" width="600"/>
+</p>
+
+### 🔷 Final Conclusion
+- The simulation successfully demonstrates how QKD post-processing works in practice.  
+- Even with errors introduced, **privacy amplification** ensures a secure final key.  
+- Error correction (e.g., LDPC codes) can be added for further synchronization.  
+
+---
+
+### 🔷 Future Improvements
+- Implement **LDPC-based error correction**.  
+- Extend sifting to support **basis comparison** as in real BB84.  
+- Add **network simulation** between Alice and Bob.  
+- Integrate with **FPGA hardware layer** for real-world deployment.  
+
+---
+
+### 📌 Appendix: Code Modules
+- `main.cpp` → Controls simulation flow  
+- `PrivAmp.h / PrivAmp.cpp` → Handles Toeplitz-based privacy amplification  
+- **Utility Functions** → Bit printing, mismatch analysis, and QBER calculation 
+
+### 🔗 Full C/C++ Code Repository
+The complete source code for the C++ simulation is available here:  
+👉 [QKD C++ Post-Processing Code](https://github.com/SRB-TYAGI/QKD-project/tree/main/C%2B%2B_Simulation)
 ## ✨ Features
 
 - ✅ Random raw key generation (Alice & Bob)  
