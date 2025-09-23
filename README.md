@@ -187,6 +187,194 @@ To enable **real-time high-throughput QKD**, sifting is implemented in hardware 
 The complete Verilog implementation of the **Sifting Block** is available here:  
 👉 [Verilog HDL for QKD Sifting](https://github.com/SRB-TYAGI/QKD-project/tree/main/Verilog_Sifting)
 
+
+---
+
+# 🔐 Privacy Amplification (PA) Block in QKD Systems
+
+### 1. Introduction
+In **Quantum Key Distribution (QKD)**, even after error correction, the shared secret key might partially leak information to an eavesdropper (Eve).  
+**Privacy Amplification (PA)** is the final post-processing step, ensuring that the final key is **shorter but information-theoretically secure**.
+
+**Goal:** Compress the corrected key so that even if Eve has partial knowledge, the final key appears *completely random* to her.
+
+---
+
+### 2. Motivation for Privacy Amplification
+- Quantum noise & hardware imperfections may leak info.  
+- Eve could intercept & resend photons (causing QBER).  
+- Error correction leaks parity bits during reconciliation.  
+
+**PA ensures:**
+- Removal of Eve’s knowledge  
+- Perfect secrecy of the final key  
+
+---
+
+### 3. Working Principle
+PA uses **universal hash functions** to compress the key.
+
+🔹 **Formula:**  
+If  
+- `K` = input key (length n)  
+- `H(K)` = entropy of the key  
+- `l` = final key length  
+- `ε` = security parameter  
+
+Then:  
+l ≤ H(K) − 2*log2(1/ε)
+
+---
+
+
+🔹 **Methods Used:**  
+- Toeplitz matrices  
+- Universal Hash Functions (MMH-MH)  
+- Number Theoretic Transform (NTT) for fast modular arithmetic  
+
+---
+
+### 4. Hardware Implementation Overview
+To achieve real-time performance, PA is implemented in **FPGA/ASIC**.  
+
+**Main Components:**
+- Input Buffer (corrected key storage)  
+- Seed Generator (random seeds for hash)  
+- Universal Hash Core (NTT-based polynomial multiplication)  
+- Compression Logic (shortens key based on QBER)  
+- Output Register (final secure key)  
+
+---
+
+### 5. Optimizations
+- Barrett or Montgomery modular reduction  
+- Parallel butterfly units in NTT  
+- Bit-slicing & pipelining for speed
+
+  <img src="https://github.com/SRB-TYAGI/QKD-project/blob/main/Images/Picture4.png" alt="" width="600"/> 
+
+---
+
+
+
+### 6. Mathematical Foundation (NTT)
+The **Number Theoretic Transform (NTT)** is analogous to FFT but over finite fields.  
+
+Steps for multiplying polynomials A(x), B(x):  
+1. Forward NTT on A(x), B(x)  
+2. Pointwise multiplication  
+3. Inverse NTT → C(x)  
+
+---
+
+### 7. Hardware Architecture
+You implemented a **2×2 NTT Butterfly Module**:
+
+- Inputs: `fi_0`, `fi_1` (24-bit each)  
+- Twiddle-factor multiplication with modular reduction  
+- Outputs: `Fi_0`, `Fi_1`  
+
+**Modules:**
+- `mult_gen_0` → modular multipliers  
+- `c_add_0` → adders  
+- `barret.v` → efficient modulo-q reduction  
+
+**Parameters:**
+- Modulus: `q = 8380417`  
+- Root of unity: `r = 1753`  
+
+**Butterfly Equations:**
+Fi_0 = fi_0 + (r^α mod q) * fi_1
+Fi_1 = fi_0 + (−r^α mod q) * fi_1
+
+
+---
+
+### 8. Code Explanation
+- **ntt_butterfly_2x2.v** → Top module for NTT butterfly  
+- **barret.v** → Barrett reduction logic  
+- **dummy_modules.v** → Placeholder IPs for simulation  
+- **tb_ntt_butterfly_2x2.v** → Testbench  
+
+**Testbench Output Example:**
+Time fi_0 fi_1 => Fi_0 Fi_1
+150000 5 3 => 14424587 10716674
+250000 9 6 => 12071957 4656131
+
+
+---
+
+### 9. Summary Table
+| Module                  | Purpose                           |
+|--------------------------|-----------------------------------|
+| **ntt_butterfly_2x2.v** | Core butterfly (NTT) operation    |
+| **barret.v**             | Efficient modular reduction       |
+| **dummy_modules.v**      | Placeholders for IP blocks        |
+| **tb_ntt_butterfly_2x2.v** | Simulation & verification        |
+
+---
+
+### 10. Simulation & Results
+✅ Verified using Vivado 2018.2  
+✅ Outputs matched expected values  
+✅ RTL confirmed correct modular arithmetic  
+
+---
+**RTL Schematic:**  
+![NTT RTL](https://github.com/SRB-TYAGI/QKD-project/blob/main/Images/RTL%20Schematic%20of%2022%20NTT%20Block.png)
+
+---
+**Output:**  
+![NTT Waveform](https://github.com/SRB-TYAGI/QKD-project/blob/main/Images/output%20of%20pa%20block.png)
+
+---
+**Waveform:**  
+![NTT Waveform](https://github.com/SRB-TYAGI/QKD-project/blob/main/Images/waveform%20of%20pa%20block.png)
+
+
+---
+
+## ⚙️ Implementation Details
+
+- **Language:** Verilog HDL  
+- **Simulation Tool:** Xilinx Vivado Simulator (2018.2)  
+- **Bit Width:** 24-bit modular arithmetic  
+- **Modules Created:**  
+  - `ntt_butterfly_2x2.v` (2×2 NTT butterfly core)  
+  - `barret.v` (modular reduction)  
+  - `tb_ntt_butterfly_2x2.v` (testbench)  
+
+- **Design Verified For:** 3 test vector sets  
+- **Cycle Count:** One butterfly operation completes in a few clock cycles  
+- **Target Hardware:** FPGA/ASIC for real-time QKD post-processing  
+
+---
+### 11. FPGA Design of PA Block
+| Component             | Description                        |
+|------------------------|------------------------------------|
+| Input FIFO             | Stores corrected key bits          |
+| NTT Core               | Fast modular multiplication        |
+| Universal Hash Gen     | Implements MMH-MH family           |
+| Barrett Reducer        | Reduces mod q                     |
+| Output Register        | Stores final secret key            |
+| FSM Controller         | Manages timing & QBER-based logic  |
+
+---
+
+### 12. Conclusion
+This project implemented **two critical QKD post-processing blocks** in Verilog HDL:  
+
+1. **Sifting Block** → Basis comparison & sifted key extraction  
+2. **Privacy Amplification Block** → NTT-based universal hashing for secure compression  
+
+**Results:**  
+- Both blocks successfully simulated in Vivado  
+- Verified correctness with multiple test vectors  
+- Provides **real-time hardware acceleration** for QKD post-processing  
+
+👉 **Full Verilog source code is available here:**  
+[🔗 Verilog HDL for QKD Privacy Amplification](https://github.com/SRB-TYAGI/QKD-project/tree/main/Verilog_PrivacyAmplification)
+
 ---
 
 
