@@ -164,14 +164,17 @@ To enable **real-time high-throughput QKD**, sifting is implemented in hardware 
 
 ---
 
----
 
 ### V. RTL Schematic  
 ![RTL Schematic of Sifting Block](https://github.com/SRB-TYAGI/QKD-project/blob/main/Images/Rtl%20schematic.png)
 
 ---
 
-### VI. Output & Waveform  
+### VI	Sifting Hardware Output
+![RTL Schematic of Sifting Block](https://github.com/SRB-TYAGI/QKD-project/blob/main/Images/Sifting%20Hardware%20output.png)
+
+---
+### VII. Output & Waveform  
 
 - **Simulation Output:** Shows sifted key bits stored in memory.  
 - **Waveform:** Confirms FSM transitions, valid bit storage, and QBER computation.  
@@ -180,7 +183,7 @@ To enable **real-time high-throughput QKD**, sifting is implemented in hardware 
 
 ---
 
-### VII. Full Verilog Source  
+### VIII. Full Verilog Source  
 The complete Verilog implementation of the **Sifting Block** is available here:  
 👉 [Verilog HDL for QKD Sifting](https://github.com/SRB-TYAGI/QKD-project/tree/main/Verilog_Sifting)
 
