@@ -321,14 +321,17 @@ Time fi_0 fi_1 => Fi_0 Fi_1
 
 ---
 **RTL Schematic:**  
+
 ![NTT RTL](https://github.com/SRB-TYAGI/QKD-project/blob/main/Images/RTL%20Schematic%20of%2022%20NTT%20Block.png)
 
 ---
 **Output:**  
+
 ![NTT Waveform](https://github.com/SRB-TYAGI/QKD-project/blob/main/Images/output%20of%20pa%20block.png)
 
 ---
 **Waveform:**  
+
 ![NTT Waveform](https://github.com/SRB-TYAGI/QKD-project/blob/main/Images/waveform%20of%20pa%20block.png)
 
 
@@ -361,11 +364,18 @@ Time fi_0 fi_1 => Fi_0 Fi_1
 
 ---
 
-### 12. Conclusion
-This project implemented **two critical QKD post-processing blocks** in Verilog HDL:  
+## 📝 12. Conclusion
 
-1. **Sifting Block** → Basis comparison & sifted key extraction  
-2. **Privacy Amplification Block** → NTT-based universal hashing for secure compression  
+In this project, two crucial post-processing blocks of **Quantum Key Distribution (QKD)** — **Sifting** and **Privacy Amplification (PA)** — were successfully designed and implemented using **Verilog HDL** and simulated in **Xilinx Vivado**.
+
+- **Sifting Block**: Responsible for comparing quantum bases and filtering out invalid key bits. It ensured that only the matched basis bits were retained, which is essential for secure key generation and minimizing the **Quantum Bit Error Rate (QBER)**.
+
+- **Privacy Amplification Block**: Implemented using a hardware-optimized **2×2 NTT (Number Theoretic Transform) butterfly architecture**. This module compressed the sifted key and eliminated any remaining partial knowledge an eavesdropper might possess. The use of NTT enabled efficient and secure hashing through modular polynomial multiplication.
+
+Simulation results validated the **correct functionality and timing** of both blocks. The outputs matched expected values, confirming the **reliability of the architecture**.
+
+This work demonstrates a foundational step toward **hardware acceleration of QKD post-processing**, contributing to the development of **real-time quantum-secure communication systems**.
+
 
 **Results:**  
 - Both blocks successfully simulated in Vivado  
