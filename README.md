@@ -386,6 +386,23 @@ This work demonstrates a foundational step toward **hardware acceleration of QKD
 
 ---
 
+## 🌍 Real-World Applications
+Quantum Key Distribution has direct applications in securing highly sensitive data across various domains:  
+
+- **Government Communications:** Protecting national security information and diplomatic communications.  
+- **Financial Transactions:** Securing banking, stock exchanges, and other high-value data transfers.  
+- **Healthcare:** Ensuring the privacy and integrity of sensitive patient records.  
+- **Critical Infrastructure:** Safeguarding energy grids, water systems, and transportation networks from cyberattacks.  
+
+---
+
+## 📌 Applications in This Project
+- Educational demonstrations of QKD post-processing  
+- Hardware acceleration of QKD for FPGA/ASICs  
+- Research prototype for **real-time quantum-secure communication systems**  
+
+---
+
 ## 📚 References  
 
 ### Research Papers
