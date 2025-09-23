@@ -42,6 +42,14 @@ The standard post-processing pipeline in most QKD protocols consists of:
 4. **Privacy Amplification (Toeplitz matrix)**  
    Compress the corrected key using universal hashing techniques to produce a **final secure key**, removing any partial information an eavesdropper may have.
 
+## QKD Post-Processing Workflow
+
+The following figure illustrates the post-processing steps in a typical QKD protocol, showing the flow from quantum transmission to the final secure key:
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/SRB-TYAGI/QKD-project/main/Images/QKD%20Post-Processing%20Workflow.png" alt="QKD Post-Processing Workflow" width="600"/>
+</p>
+
 
 ## ✨ Features
 
@@ -53,6 +61,7 @@ The standard post-processing pipeline in most QKD protocols consists of:
 - ✅ Thread-based architecture (`ThreadMgr`) for real-time pipeline  
 
 ---
+
 
 ## 📂 Project Structure
 
