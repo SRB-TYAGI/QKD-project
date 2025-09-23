@@ -4,14 +4,13 @@ Classical post-processing simulation for **Quantum Key Distribution (QKD)** base
 This project is implemented in **C++** is used to simulate classical post-quantum steps, while hardware modules are implemented in Verilog.” and simulates the **classical steps after quantum transmission**:
 
 ---
-# Introduction
+# I. Introduction
 This project focuses on **Quantum Key Distribution (QKD)**, a method for secure key sharing immune to quantum attacks. The raw key from a QKD system contains errors and redundancy, requiring post-processing steps: **Sifting**, **Error Estimation**, **Error Correction**, and **Privacy Amplification (PA)**.
 
 The algorithms for **Sifting** and **PA** were first implemented and tested in **C/C++**, allowing rapid prototyping and functional simulation. After verifying correctness, the design was migrated to hardware using **Verilog HDL** and tested on **Xilinx Vivado**, achieving real-time performance with low latency.
 
 This work demonstrates the transition from **software simulation** to **digital VLSI implementation**, providing an efficient and scalable solution for secure quantum communication.
 
-# Introduction to QKD
 
 ## What is QKD?
 
