@@ -108,16 +108,84 @@ Each phase ensures the **security, integrity, and synchronization** of the final
 ### 🔗 Full C/C++ Code Repository
 The complete source code for the C++ simulation is available here:  
 👉 [QKD C++ Post-Processing Code](https://github.com/SRB-TYAGI/QKD-project/tree/main/C%2B%2B_Simulation)
-## ✨ Features
 
-- ✅ Random raw key generation (Alice & Bob)  
-- ✅ Step-by-step **sifting output**  
-- ✅ **QBER calculation** with mismatch reporting  
-- ✅ **Privacy Amplification** via Toeplitz matrix  
-- ⚠️ LDPC-based error correction (scaffold exists, integration needed)  
-- ✅ Thread-based architecture (`ThreadMgr`) for real-time pipeline  
 
 ---
+
+# ⚡ Hardware (Verilog) Implementation of QKD Sifting
+
+### A. Sifting Block in QKD Systems
+In a Quantum Key Distribution (QKD) system, **sifting** is the first and most fundamental post-processing step performed after quantum transmission of photons. Its goal is to keep only those bits where **Alice and Bob used the same basis**, forming the **sifted key**.
+
+---
+
+### I. Why Sifting is Needed?
+- In BB84, Alice and Bob randomly select measurement bases (+ or ×).  
+- Only when their bases match, the measured bit is meaningful.  
+- Mismatched basis measurements are discarded.  
+- Output: **Shorter but more reliable key**.  
+
+**Example Table:**
+
+| Photon Index | Alice Basis | Bob Basis | Keep Bit? | Alice Bit | Bob Bit |
+|--------------|-------------|-----------|-----------|-----------|---------|
+| 1            | +           | +         | ✅ Yes    | 1         | 1       |
+| 2            | +           | ×         | ❌ No     | 0         | 0       |
+| 3            | ×           | ×         | ✅ Yes    | 1         | 1       |
+| 4            | ×           | +         | ❌ No     | 0         | 1       |
+
+👉 **Sifted Key = {1, 1}**
+
+---
+
+### II. Hardware Implementation (Verilog)
+
+To enable **real-time high-throughput QKD**, sifting is implemented in hardware (FPGA/ASIC).  
+
+**Objectives of Hardware Block**:
+- Compare Alice & Bob’s bases.  
+- Store only matching bits in memory.  
+- Count matches until a target length (e.g., 10 bits).  
+- Compute QBER (errors in matched bits).  
+
+---
+
+### III. Key Components
+
+| Component   | Function                         | Importance                               |
+|-------------|---------------------------------|------------------------------------------|
+| **LFSR8**   | Random bit & basis generator    | Simulates Alice’s randomness             |
+| **MUX2to1** | Switch manual/random inputs     | For flexible testing                     |
+| **Comparator** | Basis equality check         | Core sifting rule                        |
+| **FSM**     | Controls state flow             | Manages compare → store → finish         |
+| **Counter** | Counts sifted bits              | Generates memory addresses               |
+| **DFF**     | Synchronizes signals            | Reliable timing                          |
+| **reg_mem** | Stores sifted key bits          | Temporary secure storage                 |
+
+---
+
+---
+
+### V. RTL Schematic  
+![RTL Schematic of Sifting Block](https://github.com/SRB-TYAGI/QKD-project/blob/main/Images/RTL_Sifting_Block.png)
+
+---
+
+### VI. Output & Waveform  
+
+- **Simulation Output:** Shows sifted key bits stored in memory.  
+- **Waveform:** Confirms FSM transitions, valid bit storage, and QBER computation.  
+
+![Sifting Waveform](https://github.com/SRB-TYAGI/QKD-project/blob/main/Images/Sifting_Waveform.png)
+
+---
+
+### VII. Full Verilog Source  
+The complete Verilog implementation of the **Sifting Block** is available here:  
+👉 [Verilog HDL for QKD Sifting](https://github.com/SRB-TYAGI/QKD-project/tree/main/Verilog_Sifting)
+
+---
+
 
 
 ## 📂 Project Structure
