@@ -387,4 +387,20 @@ This work demonstrates a foundational step toward **hardware acceleration of QKD
 
 ---
 
+## 📚 References  
+
+### Research Papers
+1. An FPGA-Based 4 Mbps Secret Key Distillation Engine for Quantum Key Distribution Systems  
+2. Software Bundle for Data Post-Processing in a Quantum Key Distribution Experiment  
+3. An Overview of Postprocessing in Quantum Key Distribution  
+4. Large-scale and High-speed Privacy Amplification for FPGA-based Quantum Key Distribution  
+5. High-speed Implementation of Privacy Amplification in Continuous Variable Quantum Key Distribution  
+6. A Real-Time QKD System Based on FPGA  
+7. A Complete Beginner Guide to the Number Theoretic Transform (NTT) – Ardianto Satriawan, Rella Mareta, Hanho Lee  
+8. Open-Source FPGA Implementation of Number-Theoretic Transform for CRYSTALS-Dilithium  
+
+### Books
+1. *Quantum Cryptography and Secret-Key Distillation*  
+2. *Protecting Information: From Classical Error Correction to Quantum Cryptography*  
+
 
