@@ -184,7 +184,7 @@ To enable **real-time high-throughput QKD**, sifting is implemented in hardware 
 
 ### VIII. Full Verilog Source  
 The complete Verilog implementation of the **Sifting Block** is available here:  
-👉 [Verilog HDL for QKD Sifting](https://github.com/SRB-TYAGI/QKD-project/tree/main/Verilog_Sifting)
+👉 [Verilog HDL for QKD Sifting](https://github.com/SRB-TYAGI/QKD-project/tree/main/2.Sifting%20Block)
 
 
 ---
